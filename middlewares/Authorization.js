@@ -14,3 +14,17 @@ module.exports.PostAuthor = async function(req, res, next){
         res.redirect(`/post/${id}`)
     }
 }
+
+module.exports.CommentAuthor = async function(req, res, next){
+    const {currentUser} = req.session
+    const {id, commentId} = req.params
+    const usr = await User.findById(currentUser)
+    const post = await Post.findById(id)
+    const cmt = await Comment.findById(commentId)
+    if(post.author.equals(usr._id) || cmt.author.equals(usr._id)){
+        next()
+    }else{
+        req.flash('error', 'You are not authorised to do so')
+        res.redirect(`/post/${id}`)
+    }
+}
