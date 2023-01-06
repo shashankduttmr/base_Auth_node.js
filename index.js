@@ -13,6 +13,7 @@ const ExpressMongoSanitize = require('express-mongo-sanitize')
 const Session = require('express-session')
 const path = require('path')
 const morgan = require('morgan')
+const AppError = require('./err')
 const PORT = process.env.PORT || 4500
 const app = express()
 const HomeRoute = require('./routes/Home')
@@ -61,6 +62,16 @@ app.use(function(req, res, next){
 
 
 app.use('/', HomeRoute)
+
+
+app.use(function(req, res, next){
+    next(new AppError('Page not found', 404))
+})
+
+app.use(function(err, req, res, next){
+    const {message, status} = err
+    res.status(status).send(message)
+})
 
 app.listen(PORT, function(){
     console.log('Server is up');
