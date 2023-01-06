@@ -53,10 +53,15 @@ module.exports.UserLogin = async function (req, res, next) {
                 req.session.currentUser = U1._id
                 req.session.username = U1.username
                 req.flash('success', 'Welcome Back')
-                res.redirect('/')
+                res.redirect('/posts')
             }
         }
     } catch (error) {
         next(new AppError('Failed to login', 404))
     }
+}
+
+module.exports.logout = function(req, res){
+    req.session.destroy()
+    res.redirect('/posts')
 }
