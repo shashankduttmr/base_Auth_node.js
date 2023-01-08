@@ -15,6 +15,7 @@ const path = require('path')
 const morgan = require('morgan')
 const AppError = require('./err')
 const PORT = process.env.PORT || 4500
+const clear = require('clear')
 const app = express()
 const HomeRoute = require('./routes/Home')
 const DocsRoute = require('./routes/docs')
@@ -64,6 +65,7 @@ app.use(function(req, res, next){
 })
 
 
+
 app.use('/', HomeRoute)
 app.use('/user', AuthRoute)
 app.use('/posts', PostRoute)
@@ -78,6 +80,8 @@ app.use(function(err, req, res, next){
     const {message, status} = err
     res.status(status).send(message)
 })
+
+clear()
 
 app.listen(PORT, function(){
     console.log('Server is up');
