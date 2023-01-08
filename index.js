@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 4500
 const app = express()
 const HomeRoute = require('./routes/Home')
 const DocsRoute = require('./routes/docs')
+const AuthRoute = require('./routes/Auth/User')
 
 mongoose.set('strictQuery', true)
 
@@ -63,6 +64,7 @@ app.use(function(req, res, next){
 
 
 app.use('/', HomeRoute)
+app.use('/user', AuthRoute)
 app.use('/api-docs', DocsRoute)
 
 
