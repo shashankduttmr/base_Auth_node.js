@@ -10,5 +10,10 @@ const PostSchema = joi.object({
 }).required()
 
 module.exports.PostValidation = function(req, res, next){
-
+    const data = PostSchema.validate(req.body)
+    if(data.error){
+        next(new AppError(data.error.message, 500))
+    }else{
+        next()
+    }
 }
