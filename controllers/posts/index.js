@@ -14,3 +14,7 @@ module.exports.Home = async function(req, res, next){
         next(new AppError('Server is not Happy', 500))
     }
 }
+
+module.exports.New = function(req, res){
+    res.send('Add New Post')
+}
