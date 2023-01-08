@@ -19,6 +19,7 @@ const app = express()
 const HomeRoute = require('./routes/Home')
 const DocsRoute = require('./routes/docs')
 const AuthRoute = require('./routes/Auth/User')
+const PostRoute = require('./routes/posts/home')
 
 mongoose.set('strictQuery', true)
 
@@ -65,6 +66,7 @@ app.use(function(req, res, next){
 
 app.use('/', HomeRoute)
 app.use('/user', AuthRoute)
+app.use('/posts', PostRoute)
 app.use('/api-docs', DocsRoute)
 
 
@@ -74,7 +76,6 @@ app.use(function(req, res, next){
 
 app.use(function(err, req, res, next){
     const {message, status} = err
-    console.log(err);
     res.status(status).send(message)
 })
 
