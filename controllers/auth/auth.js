@@ -8,7 +8,7 @@ module.exports.register = function (req, res) {
 
 module.exports.NewUser = async function (req, res, next) {
     try {
-        const { name, lasname, email, username, password } = req.body
+        const { name, lastname, email, username, password } = req.body
         const Usr = await User.findOne({ username: username })
         if (Usr) {
             req.flash('error', 'Username is already taken try again')
@@ -17,7 +17,7 @@ module.exports.NewUser = async function (req, res, next) {
             const hash = await bcrypt.hash(password, 15) // function helps to generate hashed passwords returns promise
             const U1 = new User({
                 name: name,
-                lastname: lasname,
+                lastname: lastname,
                 email: email,
                 username: username,
                 password: hash
@@ -29,6 +29,7 @@ module.exports.NewUser = async function (req, res, next) {
             res.redirect('/posts')
         }
     } catch (error) {
+        console.log(error);
         next(new AppError('Failed to register', 404))
     }
 }
