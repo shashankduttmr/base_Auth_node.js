@@ -21,6 +21,7 @@ const HomeRoute = require('./routes/Home')
 const DocsRoute = require('./routes/docs')
 const AuthRoute = require('./routes/Auth/User')
 const PostRoute = require('./routes/posts/home')
+const MorePost = require('./routes/posts/post')
 
 mongoose.set('strictQuery', true)
 
@@ -69,6 +70,7 @@ app.use(function(req, res, next){
 app.use('/', HomeRoute)
 app.use('/user', AuthRoute)
 app.use('/posts', PostRoute)
+app.use('/posts/:id', MorePost)
 app.use('/api-docs', DocsRoute)
 
 
