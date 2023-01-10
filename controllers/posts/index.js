@@ -68,7 +68,7 @@ module.exports.Create = async function (req, res, next) {
                     await post.save()
                     await user.save()
                     req.flash('success', 'You have made a Post')
-                    res.redirect(`/post/${yelp._id}`)
+                    res.redirect(`/posts/${post._id}`)
                 }
             }
         }
