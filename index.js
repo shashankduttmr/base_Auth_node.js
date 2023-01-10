@@ -22,6 +22,7 @@ const DocsRoute = require('./routes/docs')
 const AuthRoute = require('./routes/Auth/User')
 const PostRoute = require('./routes/posts/home')
 const MorePost = require('./routes/posts/post')
+const CommentRoute = require('./routes/comments/index')
 
 mongoose.set('strictQuery', true)
 
@@ -72,6 +73,7 @@ app.use('/', HomeRoute)
 app.use('/user', AuthRoute)
 app.use('/posts', PostRoute)
 app.use('/posts/:id', MorePost)
+app.use('/posts/:id/comment', CommentRoute)
 app.use('/api-docs', DocsRoute)
 
 
