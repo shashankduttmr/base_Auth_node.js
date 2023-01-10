@@ -8,5 +8,6 @@ const Upload = multer({storage:Storage})
 
 Router.get('/', controllers.Home)
 Router.get('/new', middleware.isLoggedin ,controllers.New)
+Router.post('/new', middleware.isLoggedin)
 
 module.exports = Router
