@@ -3,6 +3,11 @@ info:
   title: Sample API
   description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
   version: 0.1.9
+
+  contact:
+    email: 'shashank@shashankdutt.in'
+    url: 'shashankdutt.in'
+
 servers:
   - url: '{protocol}://localhost:4500'
     description: this is just a dummy
@@ -18,3 +23,42 @@ paths:
     get:
       tags:
         - Strings
+      summary: Renders Home Page.
+      description: This is a Main Landing page.
+      responses:
+        "200":
+          description: A good request
+          content:
+            applications/json:
+              schema: 
+                type: string
+                items: 
+                  type: string
+
+  /posts:
+    get:
+      tags:
+        - Post Routes
+      summary: Returns an array of Object
+      description: A post's feed Page
+      responses:
+        "200":
+          description: ok
+          content:
+            applications/json:
+              schema:
+                type: array
+                properties:
+                  imgs: 
+                    type: array
+                      properties:
+                        url:
+                          type: string
+                        filename:
+                          type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  
+

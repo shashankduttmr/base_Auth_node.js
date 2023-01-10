@@ -14,7 +14,7 @@ module.exports.Home = async function (req, res, next) {
         if (!data) {
             next(new AppError('failed to fetch data', 404))
         } else {
-            res.render('posts/index')
+            res.render('posts/index', {data})
         }
     } catch (error) {
         next(new AppError('Server is not Happy', 500))

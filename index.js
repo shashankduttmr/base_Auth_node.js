@@ -82,7 +82,7 @@ app.use(function(req, res, next){
 })
 
 app.use(function(err, req, res, next){
-    const {message, status} = err
+    const {message, status=500} = err
     res.status(status).send(message)
 })
 
