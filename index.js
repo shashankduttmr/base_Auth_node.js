@@ -34,6 +34,7 @@ mongoose.connect(process.env.dburl)
 })
 
 app.use(express.urlencoded({extended:true}))
+app.use(express.json())
 app.use(express.static(path.join(__dirname, '/assets')))
 app.use(MethodOverride('_method'))
 app.use(CookieParser('This is a great secret cookie'))
