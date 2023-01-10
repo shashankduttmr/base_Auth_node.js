@@ -2,7 +2,7 @@ const AppError = require("../../err")
 const Post = require('../../models/Post')
 const mapboxtoken = process.env.mapbox
 const MapClient = require('@mapbox/mapbox-sdk/services/geocoding')
-const client = MapClient({ mapboxtoken })
+const client = MapClient({ accessToken:mapboxtoken })
 const User = require('../../models/User')
 const cloudinary = require('cloudinary').v2
 

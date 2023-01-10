@@ -4,25 +4,17 @@ info:
   description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
   version: 0.1.9
 servers:
-  - url: http://localhost:4500
-    description: localhost testing environment
-  - url: http://localhost:4500
+  - url: '{protocol}://localhost:4500'
     description: this is just a dummy
+    variables:
+      protocol:
+        enum:
+          - https
+          - http
+        default: http
 
 paths:
   /:
     get:
-      summary: Index Page for application main landing page.
-      responses:
-        '200':    
-          description: returns an array
-          content:
-            application/json:
-              schema:
-                type: object
-  /posts:
-      get:
-        summary: Listing all the posts by the users
-        responses:
-          '200': #status code
-            description: Array fetches from database
+      tags:
+        - Strings
