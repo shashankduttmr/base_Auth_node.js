@@ -31,7 +31,12 @@ module.exports.show = async function (req, res, next) {
         if (!id) {
             next(new AppError('invalid parameters', 500))
         } else {
-            const data = await Post.findById(id)
+            const data = await Post.findById(id).populate('comments').populate({
+                path:'comments',
+                populate:{
+                    path:'author'
+                }
+            })
             if (!data) {
                 next(new AppError('Data not found', 404))
             } else {
@@ -60,10 +65,9 @@ module.exports.Create = async function (req, res, next) {
                     const data = await client.forwardGeocode({
                         query: req.body.name + ', ' + req.body.location,
                         limit: 1
-                    })
-                        .send()
+                    }).send()
                     post.imgs = req.files.map((e) => ({ url: e.path, filename: e.filename }))
-                    post.geomatry = data.body.features[x].geometry
+                    post.geomatry = data.body.features[0].geometry
                     post.author = user
                     user.posts.push(post)
                     await post.save()

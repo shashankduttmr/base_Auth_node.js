@@ -48,17 +48,28 @@ paths:
             applications/json:
               schema:
                 type: array
-                properties:
-                  imgs: 
-                    type: array
-                      properties:
-                        url:
-                          type: string
-                        filename:
-                          type: string
-                  name:
-                    type: string
-                  description:
-                    type: string
-                  
+                items:
+                  type: object
+                  properties:
+                    imgs: 
+                      schema:
+                        type: array
+                          items: 
+                            type: object
+                            properties:
+                              url:
+                                type: string
+                              filename:
+                                type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
 
+  /posts/new:
+    get:
+      tags:
+        - Post Routes
+    post:
+      tags:
+        - Post Routes

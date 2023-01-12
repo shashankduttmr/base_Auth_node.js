@@ -16,7 +16,7 @@ const PostSchema = new Schema({
         type:String,
         required:[true]
     },
-    locations:{
+    location:{
         type:String,
         required:[true]
     },
