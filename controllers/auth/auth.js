@@ -9,10 +9,7 @@ module.exports.register = function (req, res) {
 module.exports.NewUser = async function (req, res, next) {
     try {
         const { name, lastname, email, username, password } = req.body
-        if (!name && !lastname && !email && !username && !password) {
-            req.flash('error', 'All fields are mendatory try again')
-            res.redirect('/user/register')
-        } else {
+        if (name && lastname && email && username && password) {
             const Usr = await User.findOne({ username: username })
             if (Usr) {
                 req.flash('error', 'Username is already taken try again')
@@ -27,11 +24,17 @@ module.exports.NewUser = async function (req, res, next) {
                     password: hash
                 })
                 await U1.save()
+
+                U1.password = undefined
                 req.session.currentUser = U1._id
                 req.session.username = U1.username
                 req.flash('success', `Thank you for registering mr ${U1.name} from now onwards your username will be ${U1.username}`)
                 res.redirect('/posts')
             }
+        } else {
+            req.flash('error', 'All fields are mendatory try again')
+            res.redirect('/user/register')
+
         }
     } catch (error) {
         console.log(error);
